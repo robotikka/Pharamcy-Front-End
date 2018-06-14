@@ -8,6 +8,9 @@ import SideNav from './components/common/sidenav'
 import Home from './components/home'
 import About from './components/about'
 
+import AddNewPatient from './components/patients/AddNewPatient'
+import Patients from './components/patients/Patients'
+
 class App extends Component {
   render() {
     return (
@@ -30,7 +33,7 @@ class App extends Component {
           </div>
           <div style={{ padding: 20 }}>
             <Route exact path="/" render={props => {
-              return <Home />
+              return <Patients />
             }} />
             <Route path="/about" render={props => {
               return <About />

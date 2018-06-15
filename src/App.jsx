@@ -7,6 +7,7 @@ import SideNav from './components/common/sidenav'
 
 import Home from './components/home'
 import About from './components/about'
+import Order from './components/order'
 
 import AddNewPatient from './components/patients/AddNewPatient'
 import Patients from './components/patients/Patients'
@@ -33,6 +34,10 @@ class App extends Component {
               <Route path="/viewPatients" render={props => {
                 return <Patients />
               }} />
+                <Route path="/orders" render={props => {
+                    return <Order />
+                }} />
+
             </div>
           </div>
         </div>

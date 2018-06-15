@@ -10,6 +10,8 @@ import About from './components/about'
 
 import AddNewPatient from './components/patients/AddNewPatient'
 import Patients from './components/patients/Patients'
+import AddDrugToPrescription from './components/prescriptions/AddDrugToPrescription'
+import HandlePrescriptions from './components/prescriptions/HandlePrescriptions'
 
 class App extends Component {
   render() {
@@ -33,7 +35,7 @@ class App extends Component {
           </div>
           <div style={{ padding: 20 }}>
             <Route exact path="/" render={props => {
-              return <Patients />
+              return <HandlePrescriptions />
             }} />
             <Route path="/about" render={props => {
               return <About />

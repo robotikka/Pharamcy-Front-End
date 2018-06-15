@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 export default class Patients extends Component {
@@ -35,6 +35,8 @@ export default class Patients extends Component {
           <td>{patient.NIC}</td>
           <td>{patient.contactNumber}</td>
           <td>{patient.dateOfBirth}</td>
+          {/* <td><Button bsStyle="danger" bsSize="xsmall">Delete</Button></td>
+          <td><Button bsStyle="danger" bsSize="xsmall">Edit</Button></td> */}
         </tr>
       )
     })

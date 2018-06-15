@@ -13,6 +13,14 @@ export default class TopNavbar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
+                        <Navbar.Brand>
+                            
+                            <Link to="/login">
+                                Login
+                            </Link>
+                            </Navbar.Brand>
+                    </Nav>
+                    <Nav pullRight>
                         <NavItem>
                             Home
                         </NavItem>

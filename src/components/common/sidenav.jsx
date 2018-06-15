@@ -22,6 +22,18 @@ export default class SideNavbar extends Component {
           <Nav id='products'>
             <NavText>  Products </NavText>
           </Nav>
+          <Nav id='pharmacists'>
+            <NavText> Pharmacists </NavText>
+            <Nav id='registerPharmacist'>
+              <NavText><Link to = "/registerPharmacist">Register Pharmacist</Link></NavText>
+            </Nav>
+            <Nav id='viewPharmacists'>
+              <NavText><Link to = "/viewPharmacists">View Pharmacists</Link></NavText>
+            </Nav>
+          </Nav>
+          <Nav id="reports">
+            <NavText><Link to = "/reports">Reports</Link></NavText>
+          </Nav>
         </SideNav>
       </div>
     )

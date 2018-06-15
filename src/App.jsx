@@ -8,10 +8,14 @@ import SideNav from './components/common/sidenav'
 import Home from './components/home'
 import About from './components/about'
 
-import AddNewPatient from './components/patients/AddNewPatient'
-import Patients from './components/patients/Patients'
-import AddDrugToPrescription from './components/prescriptions/AddDrugToPrescription'
-import HandlePrescriptions from './components/prescriptions/HandlePrescriptions'
+import AddNewPatient              from './components/patients/AddNewPatient'
+import Patients                   from './components/patients/Patients'
+import AddDrugToPrescription      from './components/prescriptions/AddDrugToPrescription'
+import HandlePrescriptions        from './components/prescriptions/HandlePrescriptions'
+import AddPharmacists             from './components/pharmacists/AddPharmacist'
+import ViewPharmacists            from './components/pharmacists/pharmacists'
+import ViewReports                from './components/reports/reports'
+import LoginServices              from './components/loginService/loginService'
 
 class App extends Component {
   render() {
@@ -33,6 +37,18 @@ class App extends Component {
               <Route path="/viewPatients" render={props => {
                 return <Patients />
               }} />
+              <Route path="/registerPharmacist" render = { props=>{
+                return <AddPharmacists/>
+              }}/>
+              <Route path="/viewPharmacists" render = { props=>{
+                return <ViewPharmacists/>
+              }}/>
+              <Route path="/reports" render = { props=>{
+                return <ViewReports/>
+              }}/>
+              <Route path="/login" render = { props=>{
+                return <LoginServices/>
+              }}/>
             </div>
           </div>
         </div>

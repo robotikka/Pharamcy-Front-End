@@ -17,31 +17,24 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {/* <div>
-          <div>
-          <Route exact path="/" render={props => {
-            return <Home />
-          }} />
-          <Route path="/about" render={props => {
-            return <About />
-          }} />
-          </div>
-        </div> */}
         <div>
-        <Navbar />
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <div style={{ width: 220 }}>
-            <SideNav />
+          <Navbar />
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={{ width: 220 }}>
+              <SideNav />
+            </div>
+            <div style={{ padding: 20 }}>
+              <Route exact path="/" render={props => {
+                return <HandlePrescriptions />
+              }} />
+              <Route path="/addNewPatient" render={props => {
+                return <AddNewPatient />
+              }} />
+              <Route path="/viewPatients" render={props => {
+                return <Patients />
+              }} />
+            </div>
           </div>
-          <div style={{ padding: 20 }}>
-            <Route exact path="/" render={props => {
-              return <HandlePrescriptions />
-            }} />
-            <Route path="/about" render={props => {
-              return <About />
-            }} />
-          </div>
-        </div>
         </div>
       </Router>
     );

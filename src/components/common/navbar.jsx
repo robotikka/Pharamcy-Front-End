@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 export default class TopNavbar extends Component {
     logout(e){
         
-        // window.location.href = "http://localhost:3000/login"
+        
         document.getElementById("LoggedUser").innerHTML=  "<font color=red>Not Logged In</font>";
         document.getElementById("navPaneLeft").hidden = true;
         document.getElementById("PharmacyLiink").hidden = true;
         document.getElementById("logged").textContent = "Login";
-        
+        window.location.href = "http://localhost:3000/login"
 
         e.preventDefault();
     }

@@ -54,6 +54,15 @@ export default class Reports extends Component{
                         document.getElementById("LoggedUser").innerHTML=  "<label id="+loggedIn.role+" fontColor=green>"+loggedIn.username+"</label><label id=role value= "+loggedIn.role+"></label>";
                         document.getElementById("navPaneLeft").hidden = false;
                         document.getElementById("PharmacyLiink").hidden = false;
+
+                        var role = document.getElementById("role").value;
+                        if(role==="Chief Pharmacist"){
+                            ////permissions
+                        }else if(role==="Pharmacist"){
+                            ///permissions
+                        }else if(role==="admin"){
+                            ///permissions
+                        }
                     }
                     else{
                         // alert("login failed.");
@@ -77,14 +86,7 @@ export default class Reports extends Component{
         document.getElementById('UName').value = "";
         document.getElementById('Pwd').value = "";
 
-        var role = document.getElementById("role").value;
-        if(role==="Chief Pharmacist"){
-            ////permissions
-        }else if(role==="Pharmacist"){
-            ///permissions
-        }else if(role==="admin"){
-            ///permissions
-        }
+       
 
 
         e.preventDefault();

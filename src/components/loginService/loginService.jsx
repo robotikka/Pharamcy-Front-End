@@ -56,21 +56,33 @@ export default class Reports extends Component{
                         document.getElementById("navPaneLeft").hidden = false;
                         document.getElementById("PharmacyLiink").hidden = false;
                         document.getElementById("loginDIV").hidden = true;
-                        // window.location.href = "http://localhost:3000/login";
-                        var role = document.getElementById("role").value;
-                        if(role==="Chief Pharmacist"){
-                            ////permissions
-                        }else if(role==="Pharmacist"){
-                            ///permissions
-                        }else if(role==="admin"){
-                            ///permissions
-                        }
+
+                        var role = loggedIn.role;
+                        // alert(role);
+                        // if(role==="Chief Pharmacist"){
+                        //     alert()
+                        //     ////permissions
+                        //     document.getElementById("registerPharmacist").hidden = true;
+                        //     document.getElementById("viewPharmacists").hidden = true;
+                        //     document.getElementById("addreports").hidden = true;
+                        // }else if(role==="Pharmacist"){
+                        //     alert();
+                        //     document.getElementById("registerPharmacist").hidden = true;
+                        //     document.getElementById("viewPharmacists").hidden = true;
+                        //     document.getElementById("addreports").hidden = true;
+
+                        // }else if(role==="Admin"){
+                        //     alert();
+                        //     document.getElementById("registerPharmacist").hidden = false;
+                        //     document.getElementById("viewPharmacists").hidden = false;
+                        //     document.getElementById("addreports").hidden = false;
+                        // }
                     }
                     else{
                         // alert("login failed.");
                         document.getElementById("LoggedUser").innerHTML=  "<font color=red>Not Logged In</font>";
                         document.getElementById("navPaneLeft").hidden = true;
-                        // window.location.href = "http://localhost:3000/login";
+
                     }
                 }else{
                     alert("User Not Found");
@@ -82,7 +94,7 @@ export default class Reports extends Component{
                     document.getElementById("LoggedUser").innerHTML=  "<font color=red>Not Logged In</font>";
                     document.getElementById("navPaneLeft").hidden = true;
                     document.getElementById("PharmacyLiink").hidden = true;
-                    // window.location.href = "http://localhost:3000/login";
+
             }
         )
         document.getElementById('UName').value = "";

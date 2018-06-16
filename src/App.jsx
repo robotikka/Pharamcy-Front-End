@@ -7,6 +7,13 @@ import SideNav from './components/common/sidenav'
 
 import Home from './components/home'
 import About from './components/about'
+import Order from './components/orders/newOrder'
+import ViewOrder from './components/orders/viewOrder'
+import ViewSupplier from './components/supplier/viewSuppliers'
+import AddSupplier from './components/supplier/addSupplier'
+import ViewStock from './components/inventory/viewStock'
+import UpdateStock from './components/inventory/updateStock'
+
 
 import AddNewPatient              from './components/patients/AddNewPatient'
 import Patients                   from './components/patients/Patients'
@@ -31,7 +38,7 @@ class App extends Component {
             </div>
             <div style={{ padding: 20 }}>
               <Route exact path="/" render={props => {
-                return <HandlePrescriptions />
+                return <Home />
               }} />
               <Route path="/addNewPatient" render={props => {
                 return <AddNewPatient />

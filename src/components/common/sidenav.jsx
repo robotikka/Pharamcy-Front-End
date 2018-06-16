@@ -13,11 +13,21 @@ export default class SideNavbar extends Component {
 
           <Nav id='patients'>
             <NavText> Patients </NavText>
+            <Nav id='viewAllPatients'>
+              <NavText><Link to="/viewPatients"> View Patients </Link></NavText>
+            </Nav>
             <Nav id='addNewPatient'>
               <NavText><Link to="/addNewPatient"> Add New Patient </Link></NavText>
             </Nav>
-            <Nav id='viewAllPatients'>
-              <NavText><Link to="/viewPatients"> View Patients </Link></NavText>
+          </Nav>
+
+          <Nav id='drugs'>
+            <NavText> Drugs </NavText>
+            <Nav id='addNewDrug'>
+              <NavText><Link to="/addNewDrug"> Add New Drug </Link></NavText>
+            </Nav>
+            <Nav id='viewmanageDrugs'>
+              <NavText><Link to="/manageDrugs"> Manage Drugs </Link></NavText>
             </Nav>
           </Nav>
 

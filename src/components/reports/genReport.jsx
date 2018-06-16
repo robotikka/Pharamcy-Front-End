@@ -31,15 +31,15 @@ getreports(){
                 "\ndeleted: "+element.deleted);
 
                 this.setState({
-                  reports: {
+                  reports: [{
                     name: element.name,
                     type: element.type,
                     description:element.description,
                     deleted: element.deleted
-                  }
+                  }]
                 }, () => {
-                  console.log(this.state.patient);
-                  this.postNewPatient();
+                  console.log(this.state.reports);
+                
                 })
                     
             });
@@ -67,6 +67,17 @@ getreports(){
             if(results["status"]===200){
                 alert("report added");
 
+                this.setState({
+                  reports: [{
+                    id: this.reportId.value,
+                    type: this.reportType.value,
+                    description:this.reportDescription.value,
+                    name:this.reportName.value
+                  }]
+                }, () => {
+                  console.log(this.state.reports);
+                  
+                })
             }
         }
       ).catch(
@@ -76,36 +87,7 @@ getreports(){
         }
       )
   }
-  // getInventory(){
-  //     Axios.get(URL.NODE_API+"/inventory/viewall",{headers:{'crossDomain':true}}).then(
-  //         (recieved)=>{
-  //             if(recieved.status===200){
-  //                 recieved.data.message.foreach(
-  //                     element=>{
-  //                         this.setState(
-  //                             report = {
-  //                                 id:element.DrugID,
-  //                                 batch:element.batch
-  //                             }
-  //                         ).catch(
-  //                             err=>{
-  //                                 console.log(err);
-  //                             }
-  //                         );
-
-  //                         this.genReport();
-
-
-  //                     }
-  //                 )
-  //             }
-  //         }
-  //     ).catch(
-  //         err=>{
-  //             console.log(err);
-  //         }
-  //     )
-  // }
+ 
   render() {
  
     let reports = this.state.reports.map(value => {
@@ -188,7 +170,7 @@ getreports(){
           <tbody>
             {reports}
           </tbody>
-        </Table>;
+        </Table>
       </div>
     )
   }

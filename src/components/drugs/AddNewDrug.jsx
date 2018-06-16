@@ -7,14 +7,18 @@ export default class AddNewDrug extends Component {
     super();
     this.state = {
       drug: {},
-      categories: []
+      categories: [],
+      suppliers: []
     }
 
     this.getCategories();
+    this.getSuppliers();
   }
 
   componentWillMount() {
+    console.log("ComponentWillMount")
     this.getCategories()
+    this.getSuppliers()
   }
 
   presentAlert(message) {
@@ -22,53 +26,46 @@ export default class AddNewDrug extends Component {
   }
 
   addNewDrug(e) {
-    if (!this.category.value) {
-      this.presentAlert('Category is required');
+    if (document.getElementById('name').value == "") {
+      this.presentAlert('Name is required');
       e.preventDefault();
       return;
-    } else if (!this.patientAddress.value) {
-      this.presentAlert('Address is required');
+    } else if (document.getElementById('price').value == "") {
+      this.presentAlert('Price is required');
       e.preventDefault();
       return;
-    } else if (!this.patientNIC.value) {
-      this.presentAlert('NIC is required');
+    } else if (document.getElementById('dangerLevel').value == "") {
+      this.presentAlert('Danger Level is required');
       e.preventDefault();
       return;
-    } else if (!this.patientDOB.value) {
-      this.presentAlert('Date of birth is required');
+    } else if (document.getElementById('reorderLevel').value == "") {
+      this.presentAlert('Reorder Level is required');
       e.preventDefault();
       return;
-    } else if (!this.patientContactNo.value) {
-      this.presentAlert('Contact number is required');
+    } else if (document.getElementById('dosage').value == "") {
+      this.presentAlert('Dosage is required');
+      e.preventDefault();
+      return;
+    } else if (document.getElementById('frequency').value == "") {
+      this.presentAlert('Frequency is required');
       e.preventDefault();
       return;
     }
     this.setState({
       drug: {
-        drugId: this.drugId.value,
-        categoryId: this.categoryId.value,
-        name: this.drugName.value,
-        price: this.price.value,
-        remark: this.remark.value,
-        dangerLevel: this.dangerLevel.value,
-        reorderLevel: this.reorderLevel.value,
-        dosage: this.dosage.value,
-        frequency: this.frequency.value,
-        supplier: this.supplier.value,
-
-        "drugId": 2,
-        "categoryId": 1,
-        "name": "Panadol",
-        "price": 2.5,
-        "remark": "",
-        "dangerLevel": 15,
-        "reorderLevel": 75,
-        "dosage": "2",
-        "frequency": "once every 8 hours"
+        categoryId: document.getElementById('categoryId').value,
+        name: document.getElementById('name').value,
+        price: document.getElementById('price').value,
+        remarks: document.getElementById('remarks').value,
+        dangerLevel: document.getElementById('dangerLevel').value,
+        reorderLevel: document.getElementById('reorderLevel').value,
+        dosage: document.getElementById('dosage').value,
+        frequency: document.getElementById('frequency').value,
+        supplier: document.getElementById('supplier').value,
       }
     }, () => {
       console.log(this.state.drug);
-      this.postNewPatient();
+      this.postNewDrug();
     })
 
     e.preventDefault();
@@ -82,13 +79,23 @@ export default class AddNewDrug extends Component {
     })
   }
 
-  postNewPatient() {
+  getSuppliers() {
+    axios.get('http://localhost:3001/supplier/viewall').then(res => {
+      this.setState({
+        suppliers: res.data.supplier
+      })
+    })
+  }
+
+  postNewDrug() {
     console.log('postmethod')
+    console.log(this.state.drug)
     axios.post('http://localhost:3001/drug/add', this.state.drug).then(() => {
       this.setState({
-        patient: {}
+        drug: {}
       }, () => {
-        alert('Patient added successfully');
+        alert('Drug added successfully');
+        document.getElementById("addDrug").reset();
       });
     }).catch((err) => {
       console.log(err)
@@ -96,12 +103,14 @@ export default class AddNewDrug extends Component {
     })
   }
 
+
   getValidateState(type) {
     // if (type === 'name') {
-    //   if (!this.state.name || !/^[A-Za-z\s]+$/.test(this.state.name)) {
+    //   if (!document.getElementById('name').value || !/^[A-Za-z\s]+$/.test(document.getElementById('name').value)) {
     //     return 'error';
     //   }
-    // } else if (type === 'address') {
+    // }
+    //  else if (type === 'address') {
     //   if (!this.state.address) {
     //     return 'error';
     //   }
@@ -118,139 +127,105 @@ export default class AddNewDrug extends Component {
     //     return 'error';
     //   }
     // }
-    // return null;
+    return null;
   }
 
   render() {
     let categories = this.state.categories.map(category => {
       console.log(category)
       return (
-        <option value={category.categoryId}>{category.name}</option>
+        <option key={category._id} value={category._id}>{category.name}</option>
+      )
+    })
+    let suppliers = this.state.suppliers.map(supplier => {
+      console.log(supplier)
+      return (
+        <option key={supplier._id} value={supplier._id}>{supplier.companyName}</option>
       )
     })
     return (
-      <form onSubmit={this.addNewDrug.bind(this)}>
-        <FormGroup>
-          <ControlLabel>Category</ControlLabel>
-          <select
-            // bsStyle={title.toLowerCase()}
-            // title="Category"
-            // key={i}
-            id="Category"
-          >
-            {/* <MenuItem eventKey="1">Action</MenuItem>
-            <MenuItem eventKey="2">Another action</MenuItem> */}
-            {categories}
-          </select>
-        </FormGroup>
+      <div>
+        <h3 class="box-title">Add New Drug</h3>
+        <div>
+          <form class="form-horizontal" id="addDrug" onSubmit={this.addNewDrug.bind(this)}>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Category</label>
+              <div class="col-sm-8">
+                <select class="form-control" id="categoryId" >
+                  {categories}
+                </select>
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('name')}
-        >
-          <ControlLabel>Name</ControlLabel>
-          <FormControl
-            type="text"
-            placeholder="Drug Name"
-            inputRef={(ref) => { this.drugName = ref }}
-            ref="drugName"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="text" id="name" placeholder="Drug Name" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('price')}
-        >
-          <ControlLabel>Unit Price</ControlLabel>
-          <FormControl
-            type="number"
-            placeholder="Unit Price"
-            inputRef={(ref) => { this.price = ref }}
-            ref="price"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Unit Price</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="number" id="price" placeholder="Unit Price" min="0" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('dosage')}
-        >
-          <ControlLabel>Dosage</ControlLabel>
-          <FormControl
-            type="text"
-            placeholder="Dosage"
-            inputRef={(ref) => { this.dosage = ref }}
-            ref="dosage"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Dosage</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="text" id="dosage" placeholder="General Dosage" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('frequency')}
-        >
-          <ControlLabel>Frequency</ControlLabel>
-          <FormControl
-            type="text"
-            placeholder="Frequency"
-            inputRef={(ref) => { this.frequency = ref }}
-            ref="frequency"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Frequency</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="text" id="frequency" placeholder="General Frequency" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('dangerLevel')}
-        >
-          <ControlLabel>Danger Level</ControlLabel>
-          <FormControl
-            type="number"
-            placeholder="Danger Level"
-            inputRef={(ref) => { this.dangerLevel = ref }}
-            ref="dangerLevel"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Danger Level</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="number" id="dangerLevel" placeholder="Danger Level" min="0" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('reorderLevel')}
-        >
-          <ControlLabel>Reorder Level</ControlLabel>
-          <FormControl
-            type="number"
-            placeholder="Reorder Level"
-            inputRef={(ref) => { this.reorderLevel = ref }}
-            ref="reorderLevel"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Reorder Level</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="number" id="reorderLevel" placeholder="Reorder Level" min="0" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('remark')}
-        >
-          <ControlLabel>Remarks</ControlLabel>
-          <FormControl
-            type="text"
-            placeholder="Remarks"
-            inputRef={(ref) => { this.remark = ref }}
-            ref="remark"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Remarks</label>
+              <div class="col-sm-8">
+                <input class="form-control" type="text" id="remarks" placeholder="Remarks" />
+              </div>
+            </div>
 
-        <FormGroup
-          validationState={this.getValidateState('reorderLevel')}
-        >
-          <ControlLabel>Supplier</ControlLabel>
-          <FormControl
-            type="text"
-            placeholder="Supplier"
-            inputRef={(ref) => { this.supplier = ref }}
-            ref="supplier"
-          />
-          <FormControl.Feedback />
-        </FormGroup>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Supplier</label>
+              <div class="col-sm-8">
+                <select class="form-control" id="supplier">
+                  {suppliers}
+                </select>
+              </div>
+            </div>
 
+            <div class="form-group">
 
-        <Button type="submit">Save</Button>
-      </form>
+              <div class="col-sm-8 col-sm-offset-4">
+                <button class="btn btn-success" onClick={this.addNewDrug.bind(this)}>Save</button>
+
+                <button class="btn btn-warning" type="reset">Clear</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div >
     );
   }
 }

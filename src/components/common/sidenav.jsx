@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default class SideNavbar extends Component {
   render() {
     return (
-      <div style={{background: '#2c3e50', color: '#FFF', width: 220}} id="navPaneLeft" hidden>
+      <div style={{background: '#2c3e50', color: '#FFF', width: 230}} id="navPaneLeft" hidden>
         <SideNav highlightColor='black' highlightBgColor='#00bcd4' defaultSelected='home'>
           <Nav id='home'>
             <NavText><Link to="/"> Home </Link></NavText>

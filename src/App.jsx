@@ -21,6 +21,7 @@ import HandlePrescriptions from './components/prescriptions/HandlePrescriptions'
 import AddPharmacists from './components/pharmacists/AddPharmacist'
 import ViewPharmacists from './components/pharmacists/pharmacists'
 import ViewReports from './components/reports/reports'
+import AddReports from './components/reports/genReport'
 import LoginServices from './components/loginService/loginService'
 import AddNewDrug from './components/drugs/AddNewDrug'
 import Drugs from './components/drugs/Drugs'
@@ -51,8 +52,11 @@ class App extends Component {
               <Route path="/viewPharmacists" render={props => {
                 return <ViewPharmacists />
               }} />
-              <Route path="/reports" render={props => {
+              <Route path="/printReport" render={props => {
                 return <ViewReports />
+              }} />
+              <Route path="/addReport" render={props => {
+                return <AddReports />
               }} />
               <Route path="/login" render={props => {
                 return <LoginServices />

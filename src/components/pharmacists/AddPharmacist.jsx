@@ -253,7 +253,7 @@ export default class AddPharmacist extends Component{
                                 type="text"
                                 placeholder="Enter text"
                                 inputRef={(ref) => {this.pharmacistNIC = ref}}
-                                ref="v"
+                                ref="pharmacistNIC"
                             />
                             <FormControl.Feedback />
                         </FormGroup>

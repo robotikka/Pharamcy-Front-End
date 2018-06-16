@@ -1,10 +1,10 @@
 import React, {Component}           from 'react';
 import axios                        from 'axios';
 
-import styled, { css }              from 'styled-components';
+import { css }              from 'styled-components';
 import jsPDF                        from 'jspdf';
 import html2canvas                  from 'html2canvas';
-import {Table}                      from 'react-bootstrap'
+import {Table, Button}                      from 'react-bootstrap'
 
 var URL                             = require("../../Config.app");
 var NODE_URL                        = URL.NODE_API;
@@ -20,22 +20,22 @@ export default class Reports extends Component{
     }
 
     componentWillMount(){
-        // this.getReports();
+        
     }
 
-    getReports(){
+    getReports(e){
         axios.get(NODE_URL+"/reports", {headers:{'crossDomain':true}}).then(
             (recieved)=>{
                 console.log(recieved);
                 if(recieved.status===200){
                     console.log("report Data :"+JSON.stringify(recieved.data.message+"<><>"));
-                    recieved.data.message.forEach(element => {
-                        console.log("id: "+element.id+
-                        "\nname: "+element.name+
-                        "\ntype: "+element.type+
-                        "\ndescription: "+element.description+
-                        "\ndeleted: "+element.deleted);
-                    });
+                    // recieved.data.message.forEach(element => {
+                    //     console.log("id: "+element.id+
+                    //     "\nname: "+element.name+
+                    //     "\ntype: "+element.type+
+                    //     "\ndescription: "+element.description+
+                    //     "\ndeleted: "+element.deleted);
+                    // });
 
                     var tbd =document.getElementById("reportTableB")
                     recieved.data.message.forEach(
@@ -59,7 +59,7 @@ export default class Reports extends Component{
                                 var td4 = document.createElement('td');
                                     td4.innerHTML = "<font color=green>"+element.description+"</font>";
                                     td4.colSpan="5" ;
-                                    td4.width ="150px";
+                                    td4.width ="250px";
 
                                 tr.appendChild(td1);
                                 tr.appendChild(td2);
@@ -76,7 +76,7 @@ export default class Reports extends Component{
                         (canvas)=>{
                             const imageData = canvas.toDataURL('image/png');
                             const pdf = new jsPDF();
-                            pdf.addImage(imageData, "JPEG", 0, 0);
+                            pdf.addImage(imageData, "JPEG", 12, 10);
                             // pdf.output('dataurlnewwindow');
                             pdf.save("Report.pdf");
                         });
@@ -87,16 +87,18 @@ export default class Reports extends Component{
                 }
                 
             )
+            e.preventDefault();
     }
 
     render(){
-        return <div>
+        return <div align="center">
                 <div id="divToPrint" {...css({
                     backgroundColor: '#f5f5f5',
                     width: '210mm',
+                    left:'10mm',
                     minHeight: '297mm',
-                    marginLeft: 'auto',
-                    marginRight: 'auto'
+                    marginLeft: '10%',
+                    marginRight: '10%'
                 })}>
                     <h3 align="center">Reports on dispenses</h3>
 
@@ -114,10 +116,10 @@ export default class Reports extends Component{
                         
                     </tbody>
                     </Table>
-                    <span style={{position:"relative"}}>{this.state.date.toString()}</span>
+                    <span style={{height:90}}>{this.state.date.toString()}</span>
                    
                  </div>   
-                    <input type="button" value="Generate Report" onClick={this.getReports()} />
+                    <Button  value="Generate Report" onClick={this.getReports.bind(this)} >Generate Report</Button>
             
             </div>
     }

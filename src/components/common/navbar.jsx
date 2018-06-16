@@ -8,10 +8,15 @@ export default class TopNavbar extends Component {
               <Navbar default collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="/">Pharmacy</Link>
+                        <Link to="/" id="PharmacyLiink">Pharmacy</Link>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Navbar.Collapse>
+                <Nav pullRight>
+                        <NavItem id="LoggedUser">
+                            Not Logged in
+                        </NavItem>
+                    </Nav>
                     <Nav pullRight>
                         <Navbar.Brand>
                             

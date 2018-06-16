@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FormControl, HelpBlock, FormGroup, ControlLabel, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import axios from 'axios';
 
 export default class AddNewDrug extends Component {
@@ -16,7 +15,6 @@ export default class AddNewDrug extends Component {
   }
 
   componentWillMount() {
-    console.log("ComponentWillMount")
     this.getCategories()
     this.getSuppliers()
   }
@@ -64,7 +62,6 @@ export default class AddNewDrug extends Component {
         supplier: document.getElementById('supplier').value,
       }
     }, () => {
-      console.log(this.state.drug);
       this.postNewDrug();
     })
 
@@ -88,8 +85,6 @@ export default class AddNewDrug extends Component {
   }
 
   postNewDrug() {
-    console.log('postmethod')
-    console.log(this.state.drug)
     axios.post('http://localhost:3001/drug/add', this.state.drug).then(() => {
       this.setState({
         drug: {}
@@ -103,42 +98,13 @@ export default class AddNewDrug extends Component {
     })
   }
 
-
-  getValidateState(type) {
-    // if (type === 'name') {
-    //   if (!document.getElementById('name').value || !/^[A-Za-z\s]+$/.test(document.getElementById('name').value)) {
-    //     return 'error';
-    //   }
-    // }
-    //  else if (type === 'address') {
-    //   if (!this.state.address) {
-    //     return 'error';
-    //   }
-    // } else if (type === 'nic') {
-    //   if (!this.state.nic || !/^[0-9]{9}[vVxX]$/.test(this.state.nic)) {
-    //     return 'error';
-    //   }
-    // } else if (type === 'dob') {
-    //   if (!this.state.dob) {
-    //     return 'error';
-    //   }
-    // } else if (type === 'contact') {
-    //   if (!this.state.contactNo || !/(^(1?)(\s?)([\s]?)((\(\d{3}\))|(\d{3}))([\s]?)([\s-]?)(\d{3})([\s-]?)(\d{4})+$)/.test(this.state.contactNo)) {
-    //     return 'error';
-    //   }
-    // }
-    return null;
-  }
-
   render() {
     let categories = this.state.categories.map(category => {
-      console.log(category)
       return (
         <option key={category._id} value={category._id}>{category.name}</option>
       )
     })
     let suppliers = this.state.suppliers.map(supplier => {
-      console.log(supplier)
       return (
         <option key={supplier._id} value={supplier._id}>{supplier.companyName}</option>
       )
@@ -216,10 +182,8 @@ export default class AddNewDrug extends Component {
             </div>
 
             <div class="form-group">
-
               <div class="col-sm-8 col-sm-offset-4">
                 <button class="btn btn-success" onClick={this.addNewDrug.bind(this)}>Save</button>
-
                 <button class="btn btn-warning" type="reset">Clear</button>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React, {Component}           from 'react';
 import axios                        from 'axios';
-import {Well,Button,Table}                from 'react-bootstrap'
+import {Well,Button,Table}          from 'react-bootstrap'
 
 var URL                             = require("../../Config.app");
 var NODE_URL                        = URL.NODE_API;
@@ -10,6 +10,7 @@ export default class Reports extends Component{
 
     constructor(){
         super();
+        
         this.state = {
             date :new Date(),
             user: String,
@@ -18,14 +19,17 @@ export default class Reports extends Component{
     }
 
     componentWillMount(){
-        // this.getReports();
+        
+        // this.login.bind(this);
+        
     }
 
    login(e){
       
-       var pwdField = document.getElementById("Pwd");
-       var unameField = document.getElementById("UName");
-       if(pwdField!==null)
+        
+        var pwdField = document.getElementById("Pwd");
+        var unameField = document.getElementById("UName");
+        if(pwdField!==null)
         var password = pwdField.value; 
 
         var username = unameField.value; 
@@ -33,18 +37,21 @@ export default class Reports extends Component{
         var loggedIn =[]
         axios.get(NODE_URL+"/pharmacists/username/"+username, {headers: { 'crossDomain': true }}).then(
             (recieved)=>{
-                alert(recieved.message.password);
+                // alert(recieved.data.message);
                 if(recieved.status!==404){
-                    console.log(username+ ":>>" + JSON.stringify(recieved)+"||"+password+":>>"+recieved.password)
-                    if(recieved.message.id!==null&&(recieved.password===atob(password))){
+                    // console.log(username+ ":>>" + JSON.stringify(recieved)+"||"+password+":>>"+recieved.data.message[0].password)
+                    console.log(window.btoa(password)+":::"+recieved.data.message[0].password);
+                    if((recieved.data.message[0].password===window.btoa(password))){
 
                         alert("login succuss!");
                         
                             loggedIn={
-                                username:recieved.username
+                                username:recieved.data.message[0].username,
+                                role:recieved.data.message[0].role
                             }
+                        document.getElementById("logged").textContent = "Logout";
                         document.getElementById("LoggedUser").textContent=  loggedIn.username;
-                        document.getElementById("LoggedUser").innerHTML=  "<font color=green>"+loggedIn.username+"</font>";
+                        document.getElementById("LoggedUser").innerHTML=  "<label id="+loggedIn.role+" fontColor=green>"+loggedIn.username+"</label><label id=role value= "+loggedIn.role+"></label>";
                         document.getElementById("navPaneLeft").hidden = false;
                         document.getElementById("PharmacyLiink").hidden = false;
                     }
@@ -67,6 +74,19 @@ export default class Reports extends Component{
                     // window.location.href = "http://localhost:3000/login";
             }
         )
+        document.getElementById('UName').value = "";
+        document.getElementById('Pwd').value = "";
+
+        var role = document.getElementById("role").value;
+        if(role==="Chief Pharmacist"){
+            ////permissions
+        }else if(role==="Pharmacist"){
+            ///permissions
+        }else if(role==="admin"){
+            ///permissions
+        }
+
+
         e.preventDefault();
    }
     render(){

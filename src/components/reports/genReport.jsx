@@ -1,7 +1,7 @@
 import React, { Component }                                             from 'react'
 import { Form, FormGroup, ControlLabel, FormControl, Button, Table }    from 'react-bootstrap';
 import URL                                                         from '../../Config.app'    
-import Axios from 'axios';
+import axios from 'axios';
 import Reports from './reports';
 
 export default class GenerateReport extends Component {
@@ -18,11 +18,11 @@ export default class GenerateReport extends Component {
   // }
 
 getreports(){
-  axios.get(NODE_URL+"/reports", {headers:{'crossDomain':true}}).then(
+  axios.get(URL.NODE_API+"/reports", {headers:{'crossDomain':true}}).then(
     (recieved)=>{
         console.log(recieved);
         if(recieved.status===200){
-            console.log("report Data :"+JSON.stringify(recieved.data.message+"<><>"));
+            console.log("report Data :"+recieved.data.message+"<><>");
             recieved.data.message.forEach(element => {
                 console.log("id: "+element.id+
                 "\nname: "+element.name+
@@ -54,16 +54,16 @@ getreports(){
   genReport(e){
     e.preventDefault();
 
-      Axios.post(URL.NODE_API+"/reports",
+      axios.post(URL.NODE_API+"/reports",
       {
-        id: this.reportId,
-        name:this.reportName,
-        type: this.reportType,
-        description:this.reportDescription
+        id: this.reportId.value,
+        name:this.reportName.value,
+        type: this.reportType.value,
+        description:this.reportDescription.value
 
       }).then(
         (results)=>{
-          onsole.log(results);
+          console.log(results);
             if(results["status"]===200){
                 alert("report added");
 
@@ -112,7 +112,7 @@ getreports(){
       console.log(value)
       return (
         <tr key={this.reportId}>
-          <td>{patient.id}</td>
+          <td>{value.id}</td>
           <td>{value.name}</td>
           <td>{value.type}</td>
           <td>{value.description}</td>

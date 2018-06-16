@@ -238,14 +238,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        {/* <div>
-                            <label className="col-lg-12"><span className="col-lg-6">Name:</span>
-                                <span className="col-lg-6">
-                                <input type="text" ref="pharmacistName"/>
-                                </span>
-                            </label>
-                            <br/>
-                        </div> */}
+                        
                         <FormGroup
                             validationState={this.getValidateState('NIC')}>
                             <ControlLabel>NIC</ControlLabel>
@@ -257,13 +250,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        {/* <div>
-                            <label className="col-lg-12"><span className="col-lg-6">NIC:</span>
-                                
-                            <span className="col-lg-6"></span><input type="text" ref="pharmacistNIC"/>
-                            </label>
-                            <br/>
-                        </div> */}
+                        
                         <FormGroup
                             validationState={this.getValidateState('address')}>
                             <ControlLabel>Address</ControlLabel>
@@ -275,12 +262,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        {/* <div >
-                            <label className="col-lg-12"><span className="col-lg-6">Address:</span>
-                                <input type="text" ref="pharmacistAddress"/>
-                            </label>
-                            <br/>
-                        </div> */}
+                        
                         <FormGroup
                             validationState={this.getValidateState('contact')}>
                             <ControlLabel>Contact</ControlLabel>
@@ -292,13 +274,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>                        
-                        {/* <div>
-                            <label className="col-lg-12"><span className="col-lg-6">Contact:</span>
-                            <span className="col-xm-2"></span><input type="tel" ref="pharmacistContact"/>
-                            </label>
-                            <br/>
-                        </div>
-                         */}
+                        
                         <FormGroup
                             validationState={this.getValidateState('email')}>
                             <ControlLabel>Email</ControlLabel>
@@ -310,13 +286,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        {/* <div>
-                            <label  className="col-lg-4" ><span className="col-sm-6">Email  :</span>
-                            
-                            <span className="col-xm-2"></span><input type="text" ref="pharmacistEmail"/>
-                            </label>
-                            <br/>
-                        </div> */}
+                        
                         <FormGroup
                             validationState={this.getValidateState('role')}>
                             <ControlLabel>Role:</ControlLabel>
@@ -328,12 +298,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>                        
-                        {/* <div>
-                            <label  className="col-lg-12" ><span className="col-sm-8">Role:</span>
-                            <span className="col-sm-2"></span><input type="text" ref="pharmacistRole"/>
-                            </label>
-                            <br/>
-                        </div> */}
+                        
                         <br/><br/>
                         <FormGroup
                             validationState={this.getValidateState('username')}>
@@ -346,11 +311,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>
-                        {/* <div>
-                            <label>User Name:
-                                <input type="text" ref="pharmacistUname"/>
-                            </label>
-                        </div> */}
+                        
                         <FormGroup
                             validationState={this.getValidateState('password')}>
                             <ControlLabel>Password</ControlLabel>
@@ -362,12 +323,7 @@ export default class AddPharmacist extends Component{
                             />
                             <FormControl.Feedback />
                         </FormGroup>                       
-                        {/* <div>
-                            <label>Password:
-                                <input type="password" ref="pharmacistPassword"/>
-                            </label>
-                            <br/>
-                        </div> */}
+                        
                         <div>
                             <Button type="submit" value="Reg">Register</Button>
                             <Button type="button" value="Upd" onClick={ this.updatePharmacist.bind(this)}>Update</Button>

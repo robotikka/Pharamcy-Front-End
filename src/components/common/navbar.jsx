@@ -11,6 +11,7 @@ export default class TopNavbar extends Component {
         document.getElementById("PharmacyLiink").hidden = true;
         document.getElementById("logged").textContent = "Login";
         window.location.href = "http://localhost:3000/login"
+        document.getElementById("loginDIV").hidden = false;
 
         e.preventDefault();
     }

@@ -6,9 +6,9 @@ export default class newOrder extends Component {
     constructor(props) {
         super(props);
         this.state={
-            order: [],
-            data:false,
-            order_items:[]
+            order_items:[],
+            items:[],
+            data:false
         };
     }
 
@@ -16,31 +16,20 @@ export default class newOrder extends Component {
 
     render() {
 
-
-        var Order=this.state.order;
+        var Order=this.state.order_items;
         console.log(Order);
         if(this.state.data){
             Order=Order.map(function (order,index) {
                 return(
                     <tr key={index} className="w3-light-grey">
-                        <td>{order.orderID}</td>
-                        <td>{order.orderDate}</td>
-                        <td>{
-                            order.items.map(function (item,ind) {
-                                return(
-                                    <ul key={ind}>
-                                        <li>Drug Code :{item.medicineID}</li>
-                                        <li>Quantity : {item.qty}</li>
-                                    </ul>
-                                )
-                            })
-                        }
-                        </td>
-                        <td>{order.supplier}</td>
+                        <td>{order.medicineID}</td>
+                        <td>{order.qty}</td>
                     </tr>
                 );
             });
         }
+
+
 
         return <div >
             <form id={"main"}>
@@ -55,7 +44,18 @@ export default class newOrder extends Component {
 
                     <button onClick={this.setOrderItems.bind(this)}>Add</button>
                 </form>
-
+                <br/><br/>
+                <table className="w3-table-all w3-hoverable">
+                    <thead>
+                    <tr>
+                        <th>Drug ID</th>
+                        <th>Qty</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {Order}
+                    </tbody>
+                </table>
                 <br/><br/>
 
                 Supplier :<br/>
@@ -74,9 +74,14 @@ export default class newOrder extends Component {
         e.preventDefault()
         var drugID=document.getElementById('drug_id').value
         var quantity=document.getElementById('qty').value
-        this.state.order_items.push({medicineID:drugID,qty:quantity})
-        console.log(this.state.order_items);
+        this.state.items.push({medicineID:drugID,qty:quantity});
+        this.setState({
+           order_items:this.state.items,
+            data:true
+        });
+        console.log(this.state.order_items)
         document.getElementById('sub').reset()
+
     }
 
     setData(e){
@@ -96,7 +101,9 @@ export default class newOrder extends Component {
             console.log(confirm);
             alert("Success");
         });
-
+        this.setState({
+            order_items:[]
+        });
         this.state.order_items=[]
         document.getElementById('main').reset()
 

@@ -15,14 +15,14 @@ export default class New extends Component {
 
     render() {
 
-        var inventory=this.state.inventory;
-        console.log(inventory);
+        var inventory1=this.state.inventory;
+        console.log(inventory1);
         if(this.state.data){
-            inventory=inventory.map(function (stock,index) {
+            var inventory2=inventory1.map(function (stock,index) {
                 console.log(stock.DrugID);
                 return(
                     <tr key={index} className="w3-light-grey">
-                        <td>{stock.DrugID}</td>
+                        <td>{stock.DrugID.name}</td>
                         <td>{
                             stock.batch.map(function (item,ind) {
                                 return(
@@ -52,7 +52,7 @@ export default class New extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                {inventory}
+                {inventory2}
                 </tbody>
             </table>
             <br/><br/>

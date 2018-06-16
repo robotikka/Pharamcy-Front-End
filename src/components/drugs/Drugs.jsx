@@ -269,9 +269,11 @@ export default class Drugs extends Component {
                 </form>
 
                     <div class="col-sm-8 col-sm-offset-4">
-                      <button class="btn btn-success" onClick={this.editDrug.bind(this)}>Update</button>
+                      <button class="btn btn-success" data-dismiss="modal" onClick={this.editDrug.bind(this)}>Update</button>
+                      
+                      {/* <button class="btn btn-warning" onClick={document.getElementById("updateDrug").reset()}>Clear</button> */}
 
-                      <button class="btn btn-warning" type="reset">Clear</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
 
 
@@ -281,8 +283,8 @@ export default class Drugs extends Component {
 
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                {/* <button type="button" class="btn btn-default" data-dismiss="modal">Edit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> */}
               </div>
             </div>
 

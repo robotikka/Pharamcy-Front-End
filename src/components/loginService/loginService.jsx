@@ -49,12 +49,14 @@ export default class Reports extends Component{
                                 username:recieved.data.message[0].username,
                                 role:recieved.data.message[0].role
                             }
+                            
                         document.getElementById("logged").textContent = "Logout";
                         document.getElementById("LoggedUser").textContent=  loggedIn.username;
                         document.getElementById("LoggedUser").innerHTML=  "<label id="+loggedIn.role+" fontColor=green>"+loggedIn.username+"</label><label id=role value= "+loggedIn.role+"></label>";
                         document.getElementById("navPaneLeft").hidden = false;
                         document.getElementById("PharmacyLiink").hidden = false;
-
+                        document.getElementById("loginDIV").hidden = true;
+                        // window.location.href = "http://localhost:3000/login";
                         var role = document.getElementById("role").value;
                         if(role==="Chief Pharmacist"){
                             ////permissions
@@ -92,7 +94,7 @@ export default class Reports extends Component{
         e.preventDefault();
    }
     render(){
-        return <div>
+        return <div id="loginDIV">
                     <div style={{"border":' 0px solid  #7ca3e2',"alignItems":"100px",'backgroundColor':"#f0e6f2",'width':"820px"}}><h3>Login</h3></div>
                          
                 <div style={{'alignContent':'stretch','display': '-webkit-inline-box','backgroundColor':"#eff7c3", 'border':' 10px solid #d6ebff','borderStyle': 'outset','height':'100px', 'width':"820px"}}>

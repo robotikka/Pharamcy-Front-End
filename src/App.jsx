@@ -16,6 +16,8 @@ import AddPharmacists             from './components/pharmacists/AddPharmacist'
 import ViewPharmacists            from './components/pharmacists/pharmacists'
 import ViewReports                from './components/reports/reports'
 import LoginServices              from './components/loginService/loginService'
+import PrintReport                from './components/reports/genReport'
+import AddReport                  from './components/reports/reports'
 
 class App extends Component {
   render() {
@@ -48,6 +50,12 @@ class App extends Component {
               }}/>
               <Route path="/login" render = { props=>{
                 return <LoginServices/>
+              }}/>
+              <Route path="/printReport" render = { props=>{
+                return <PrintReport  />
+              }}/>
+              <Route path="/addReport" render = { props=>{
+                return <AddReport/>
               }}/>
             </div>
           </div>

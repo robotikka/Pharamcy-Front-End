@@ -7,6 +7,13 @@ import SideNav from './components/common/sidenav'
 
 import Home from './components/home'
 import About from './components/about'
+import Order from './components/orders/newOrder'
+import ViewOrder from './components/orders/viewOrder'
+import ViewSupplier from './components/supplier/viewSuppliers'
+import AddSupplier from './components/supplier/addSupplier'
+import ViewStock from './components/inventory/viewStock'
+import UpdateStock from './components/inventory/updateStock'
+
 
 import AddNewPatient              from './components/patients/AddNewPatient'
 import Patients                   from './components/patients/Patients'
@@ -16,6 +23,9 @@ import AddPharmacists             from './components/pharmacists/AddPharmacist'
 import ViewPharmacists            from './components/pharmacists/pharmacists'
 import ViewReports                from './components/reports/reports'
 import LoginServices              from './components/loginService/loginService'
+import AddNewPatient from './components/patients/AddNewPatient'
+import Patients from './components/patients/Patients'
+import HandlePrescriptions from './components/prescriptions/HandlePrescriptions'
 
 class App extends Component {
   render() {
@@ -29,7 +39,7 @@ class App extends Component {
             </div>
             <div style={{ padding: 20 }}>
               <Route exact path="/" render={props => {
-                return <HandlePrescriptions />
+                return <Home />
               }} />
               <Route path="/addNewPatient" render={props => {
                 return <AddNewPatient />
@@ -49,6 +59,35 @@ class App extends Component {
               <Route path="/login" render = { props=>{
                 return <LoginServices/>
               }}/>
+              <Route path="/orders" render={props => {
+                return <Order />
+              }} />
+              <Route path="/dispenseDrugs" render={props => {
+                return <HandlePrescriptions />
+              }} />
+                <Route path="/newOrder" render={props => {
+                    return <Order />
+                }} />
+
+                <Route path="/viewOrder" render={props => {
+                    return <ViewOrder />
+                }} />
+
+                <Route path="/viewSupplier" render={props => {
+                    return <ViewSupplier />
+                }} />
+                <Route path="/addSupplier" render={props => {
+                    return <AddSupplier />
+                }} />
+
+                <Route path="/ViewStock" render={props => {
+                    return <ViewStock />
+                }} />
+                <Route path="/UpdateStock" render={props => {
+                    return <UpdateStock />
+                }} />
+
+
             </div>
           </div>
         </div>

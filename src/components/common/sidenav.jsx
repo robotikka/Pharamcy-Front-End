@@ -33,12 +33,15 @@ export default class SideNavbar extends Component {
               <NavText><Link to = "/viewPharmacists">View Pharmacists</Link></NavText>
             </Nav>
           </Nav>
-          <Nav id="reports">
-            <NavText><Link to = "/printReport">Reports</Link></NavText>
-          </Nav>
-          <Nav id="reports">
-            <NavText><Link to = "/addReport">Add Report</Link></NavText>
-          </Nav>
+          <Nav id='Reports'>
+            <NavText> Reports </NavText>
+            <Nav id="reports">
+              <NavText><Link to = "/printReport">Print Reports</Link></NavText>
+            </Nav>
+            <Nav id="addreports">
+              <NavText><Link to = "/addReport">Add Report</Link></NavText>
+            </Nav>
+            </Nav>
 
 
 

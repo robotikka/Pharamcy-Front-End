@@ -65,11 +65,12 @@ export default class Drugs extends Component {
   updateDrug() {
     console.log('updatemethod')
     console.log(this.state.editingDrug)
-    axios.post('http://localhost:3001/drug/update/'+this.state.editingDrugId, this.state.editingDrug).then(() => {
+    axios.put('http://localhost:3001/drug/update/'+this.state.editingDrugId, this.state.editingDrug).then(() => {
       this.setState({
         editingDrug: {},
         editingDrugId: {}
       }, () => {
+        this.getDrugs();
         alert('Drug updated successfully');
         document.getElementById("updateDrug").reset();
       });
@@ -82,27 +83,27 @@ export default class Drugs extends Component {
   editDrug(e) {
     if (document.getElementById('name').value == "") {
       this.presentAlert('Name is required');
-      e.preventDefault();
+      // e.preventDefault();
       return;
     } else if (document.getElementById('price').value == "") {
       this.presentAlert('Price is required');
-      e.preventDefault();
+      // e.preventDefault();
       return;
     } else if (document.getElementById('dangerLevel').value == "") {
       this.presentAlert('Danger Level is required');
-      e.preventDefault();
+      // e.preventDefault();
       return;
     } else if (document.getElementById('reorderLevel').value == "") {
       this.presentAlert('Reorder Level is required');
-      e.preventDefault();
+      // e.preventDefault();
       return;
     } else if (document.getElementById('dosage').value == "") {
       this.presentAlert('Dosage is required');
-      e.preventDefault();
+      // e.preventDefault();
       return;
     } else if (document.getElementById('frequency').value == "") {
       this.presentAlert('Frequency is required');
-      e.preventDefault();
+      // e.preventDefault();
       return;
     }
     this.setState({
@@ -119,12 +120,18 @@ export default class Drugs extends Component {
       this.updateDrug();
     })
 
-    e.preventDefault();
+    // e.preventDefault();
+  }
+
+
+  presentAlert(message) {
+    alert(message);
   }
 
   setEditingDrug(drug) {
     console.log("HII, editing " + drug.name)
 
+    document.getElementById("name").value=drug.name
     document.getElementById("price").value=drug.price
     document.getElementById("dosage").value=drug.dosage
     document.getElementById("frequency").value=drug.frequency
@@ -257,15 +264,15 @@ export default class Drugs extends Component {
 
                   <div class="form-group">
 
-                    <div class="col-sm-8 col-sm-offset-4">
-                      <button class="btn btn-success" onClick={this.editDrug.bind(this,this.state.editingDrug)}>Update</button>
 
-                      <button class="btn btn-warning" type="reset">Clear</button>
-                    </div>
                   </div>
                 </form>
 
+                    <div class="col-sm-8 col-sm-offset-4">
+                      <button class="btn btn-success" onClick={this.editDrug.bind(this)}>Update</button>
 
+                      <button class="btn btn-warning" type="reset">Clear</button>
+                    </div>
 
 
 

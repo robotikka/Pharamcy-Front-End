@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 
-export default class Order extends Component {
+export default class newOrder extends Component {
     constructor(props) {
         super(props);
         this.state={
@@ -17,7 +17,6 @@ export default class Order extends Component {
     render() {
 
 
-
         var Order=this.state.order;
         console.log(Order);
         if(this.state.data){
@@ -26,6 +25,17 @@ export default class Order extends Component {
                     <tr key={index} className="w3-light-grey">
                         <td>{order.orderID}</td>
                         <td>{order.orderDate}</td>
+                        <td>{
+                            order.items.map(function (item,ind) {
+                                return(
+                                    <ul key={ind}>
+                                        <li>Drug Code :{item.medicineID}</li>
+                                        <li>Quantity : {item.qty}</li>
+                                    </ul>
+                                )
+                            })
+                        }
+                        </td>
                         <td>{order.supplier}</td>
                     </tr>
                 );
@@ -33,21 +43,18 @@ export default class Order extends Component {
         }
 
         return <div >
-            <form >
-                Order ID:<br/>
-                <input type="text" id="drug" name="name" />
-                <br/>
-
+            <form id={"main"}>
                 order Date :<br/>
                 <input type="date" id="orderdate" name="isbn" />
                 <br/><br/>
 
-                Drugs :<br/>
-                <input type="text" id="drug_id" name="price" placeholder={"Drug ID"} />
-                <input type="text" id="qty" name="price" placeholder={"Ordering Quantity"} />
+                <form id={"sub"}>
+                    Drugs :<br/>
+                    <input type="text" id="drug_id" name="price" placeholder={"Drug ID"} />
+                    <input type="number" id="qty" name="price" placeholder={"Ordering Quantity"} />
 
-                <button onClick={this.setOrderItems.bind(this)}>Add</button>
-
+                    <button onClick={this.setOrderItems.bind(this)}>Add</button>
+                </form>
 
                 <br/><br/>
 
@@ -60,20 +67,6 @@ export default class Order extends Component {
                 <br/>
 
             </form>
-            <table className="w3-table-all w3-hoverable">
-                <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Order Date</th>
-                    <th>Due Date</th>
-                </tr>
-                </thead>
-                <tbody>
-                {Order}
-                </tbody>
-            </table>
-            <br/><br/>
-            <button onClick={this.getData.bind(this)}>View Orders</button>
 
         </div>;
     }
@@ -83,20 +76,20 @@ export default class Order extends Component {
         var quantity=document.getElementById('qty').value
         this.state.order_items.push({medicineID:drugID,qty:quantity})
         console.log(this.state.order_items);
+        document.getElementById('sub').reset()
     }
 
     setData(e){
         e.preventDefault();
-        var order_id=document.getElementById('drug').value;
         var order_date=document.getElementById('orderdate').value;
         var supplier=document.getElementById('supplier').value;
-        fetch('http://localhost:3000/order/new',{
+        fetch('http://localhost:3001/order/new',{
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({orderID:order_id, orderDate:order_date, items:this.state.order_items, supplier:supplier})
+            body: JSON.stringify({orderDate:order_date, items:this.state.order_items, supplier:supplier})
         }).then(function (data) {
             return data;
         }).then(function (confirm) {
@@ -105,20 +98,10 @@ export default class Order extends Component {
         });
 
         this.state.order_items=[]
+        document.getElementById('main').reset()
 
     }
 
-    getData(){
-        fetch('http://localhost:3000/order/viewall').then(function (data) {
-            console.log(data);
-            return data.json();
-        }).then(json=>{
-            this.setState({
-                order:json.Order,
-                data:true
-            });
-        });
-    }
 
 
 

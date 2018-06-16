@@ -37,7 +37,7 @@ class App extends Component {
             </div>
             <div style={{ padding: 20 }}>
               <Route exact path="/" render={props => {
-                return <Home />
+                return <Patients />
               }} />
               <Route path="/addNewPatient" render={props => {
                 return <AddNewPatient />

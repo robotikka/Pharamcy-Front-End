@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormControl, HelpBlock, FormGroup, ControlLabel, Button } from 'react-bootstrap';
+import { FormControl, HelpBlock, FormGroup, ControlLabel, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 
 export default class AddNewPatient extends Component {
@@ -61,6 +61,11 @@ export default class AddNewPatient extends Component {
         patient: {}
       }, () => {
         alert('Patient added successfully');
+        this.patientName.value ='';
+        this.patientAddress.value = '';
+        this.patientNIC.value = '';
+        this.patientDOB.value = '';
+        this.patientContactNo.value = '';
       });
     }).catch((err) => {
       console.log(err)
@@ -95,7 +100,7 @@ export default class AddNewPatient extends Component {
 
   render() {
     return (
-      <form onSubmit={this.addNewUser.bind(this)}>
+      <Form onSubmit={this.addNewUser.bind(this)}>
         <FormGroup
           validationState={this.getValidateState('name')}
         >
@@ -163,7 +168,7 @@ export default class AddNewPatient extends Component {
         </FormGroup>
 
         <Button type="submit">Save</Button>
-      </form>
+      </Form>
     );
   }
 }

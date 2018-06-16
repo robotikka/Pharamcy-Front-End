@@ -93,7 +93,7 @@ export default class Reports extends Component{
    }
     render(){
         return <div>
-                    <div style={{"border":' 10px solid  #7ca3e2',"alignItems":"100px",'backgroundColor':"#f0e6f2",'width':"820px"}}><h3>Login</h3></div>
+                    <div style={{"border":' 0px solid  #7ca3e2',"alignItems":"100px",'backgroundColor':"#f0e6f2",'width':"820px"}}><h3>Login</h3></div>
                          
                 <div style={{'alignContent':'stretch','display': '-webkit-inline-box','backgroundColor':"#eff7c3", 'border':' 10px solid #d6ebff','borderStyle': 'outset','height':'100px', 'width':"820px"}}>
                     

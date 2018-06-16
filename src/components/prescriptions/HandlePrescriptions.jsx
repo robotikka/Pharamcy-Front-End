@@ -69,6 +69,7 @@ export default class HandlePrescriptions extends Component {
       "drugs": drugs,
       "total": total
     }).then(res => {
+      alert('Payment Successfull')
       console.log(res)
     }).catch(err => {
       console.log(err)

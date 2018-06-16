@@ -49,7 +49,7 @@ export default class HandlePrescriptions extends Component {
 
     console.log('drugs' ,drugs)
     this.submitPayment(drugs, totalAmount)
-    // this.submitPrescription(drugList);
+    this.submitPrescription(drugList);
   }
 
   submitPrescription(drugList) {

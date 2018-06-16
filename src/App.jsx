@@ -26,7 +26,7 @@ class App extends Component {
             </div>
             <div style={{ padding: 20 }}>
               <Route exact path="/" render={props => {
-                return <HandlePrescriptions />
+                return <Home />
               }} />
               <Route path="/addNewPatient" render={props => {
                 return <AddNewPatient />
@@ -34,9 +34,12 @@ class App extends Component {
               <Route path="/viewPatients" render={props => {
                 return <Patients />
               }} />
-                <Route path="/orders" render={props => {
-                    return <Order />
-                }} />
+              <Route path="/orders" render={props => {
+                return <Order />
+              }} />
+              <Route path="/dispenseDrugs" render={props => {
+                return <HandlePrescriptions />
+              }} />
 
             </div>
           </div>

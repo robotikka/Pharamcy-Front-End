@@ -1,10 +1,10 @@
 import React, {Component}           from 'react';
 import axios                        from 'axios';
 
-import { css }              from 'styled-components';
+import { css }                      from 'styled-components';
 import jsPDF                        from 'jspdf';
 import html2canvas                  from 'html2canvas';
-import {Table, Button}                      from 'react-bootstrap'
+import {Table, Button}              from 'react-bootstrap'
 
 var URL                             = require("../../Config.app");
 var NODE_URL                        = URL.NODE_API;
@@ -28,15 +28,6 @@ export default class Reports extends Component{
             (recieved)=>{
                 console.log(recieved);
                 if(recieved.status===200){
-                    console.log("report Data :"+JSON.stringify(recieved.data.message+"<><>"));
-                    // recieved.data.message.forEach(element => {
-                    //     console.log("id: "+element.id+
-                    //     "\nname: "+element.name+
-                    //     "\ntype: "+element.type+
-                    //     "\ndescription: "+element.description+
-                    //     "\ndeleted: "+element.deleted);
-                    // });
-
                     var tbd =document.getElementById("reportTableB")
                     recieved.data.message.forEach(
                         element=>{

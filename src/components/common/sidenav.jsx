@@ -46,7 +46,7 @@ export default class SideNavbar extends Component {
           <Nav id='Reports'>
             <NavText> Reports </NavText>
             <Nav id="reports">
-              <NavText><Link to = "/printReport">Print Reports</Link></NavText>
+              <NavText><Link to = "/printReports">Print Reports</Link></NavText>
             </Nav>
             <Nav id="addreports">
               <NavText><Link to = "/addReport">Add Report</Link></NavText>

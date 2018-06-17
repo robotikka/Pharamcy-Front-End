@@ -38,14 +38,14 @@ export default class Reports extends Component{
         axios.get(NODE_URL+"/pharmacists/username/"+username, {headers: { 'crossDomain': true }}).then(
             (recieved)=>{
                 // alert(recieved.data.message);
-               
-                if(recieved.data.message[0]===undefined){
+                
+                if(recieved.data.message[0]===undefined||recieved.status===404){
                     alert("Login Fails!");
                 }
                 if(recieved.status!==404){
                     
                     // console.log(username+ ":>>" + JSON.stringify(recieved)+"||"+password+":>>"+recieved.data.message[0].password)
-                    console.log(window.btoa(password)+":::"+recieved.data.message[0].password);
+                    // console.log(":::"+recieved.status);
                     
                     if((recieved.data.message[0].password===window.btoa(password))){
 
@@ -84,10 +84,12 @@ export default class Reports extends Component{
             }
         ).catch(
             err=>{
-                    // alert("login failed.");
-                    document.getElementById("LoggedUser").innerHTML=  "<font color=red>Not Logged In</font>";
-                    document.getElementById("navPaneLeft").hidden = true;
-                    document.getElementById("PharmacyLiink").hidden = true;
+                console.log(err)
+                if(err.message.trim()==="Request failed with status code 404")
+                    alert("Fill Username.");
+                document.getElementById("LoggedUser").innerHTML=  "<font color=red>Not Logged In</font>";
+                document.getElementById("navPaneLeft").hidden = true;
+                document.getElementById("PharmacyLiink").hidden = true;
                     // window.location.href = "http://localhost:3000/login";
             }
         )

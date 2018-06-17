@@ -55,31 +55,36 @@ export default class Pharmacists extends Component{
                                 var tb = document.getElementById("tablePhB");
                                 var r = document.createElement('tr');
                                 var d1 = document.createElement('td');
-                                d1.innerHTML =  "<input type=number id=id"+i+" value= "+this.state.pharmaDetails.id+" disabled/>";
-                                d1.colSpan = 5;
+                                d1.innerHTML =  "<input type=number style=width:50px id=id"+i+" value= "+this.state.pharmaDetails.id+" disabled/>";                                
                                 var d2 = document.createElement('td');
-                                d2.innerHTML = "<input type=text id=name"+i+" value= "+this.state.pharmaDetails.name+" disabled/>";
-                                d2.colSpan  =5;
+                                d2.innerHTML = "<input style=width:120px type=text id=name"+i+" value= "+this.state.pharmaDetails.name+" disabled/>";
+                                d2.colSpan  =1;
                                 var d3 = document.createElement('td');
-                                d3.innerHTML =  "<input type=text id=nic"+i+" value= "+this.state.pharmaDetails.nic+" disabled/>";
-                                d3.colSpan = 5;
+                                d3.innerHTML =  "<input type=text style=width:120px id=nic"+i+" value= "+this.state.pharmaDetails.nic+" disabled/>";
+                                d3.colSpan = 1;
                                 var d4 = document.createElement('td');
-                                d4.innerHTML =  "<input type=text id=address"+i+" value= "+this.state.pharmaDetails.address+" disabled/>";
-                                d4.colSpan = 5;
+                                d4.innerHTML =  "<input type=text style=width:120px id=address"+i+" value= "+this.state.pharmaDetails.address+" disabled/>";
+                                d4.colSpan = 1;
                                 var d5 = document.createElement('td');
-                                d5.innerHTML =  "<input type=text id=contact"+i+" value= "+this.state.pharmaDetails.contact+" disabled/>";
-                                d5.colSpan = 5;
+                                d5.innerHTML =  "<input type=text style=width:120px id=contact"+i+" value= "+this.state.pharmaDetails.contact+" disabled/>";
+                                d5.colSpan = 1;
                                 var d6 = document.createElement('td');
-                                d6.innerHTML =  "<input type=text id=email"+i+" value= "+this.state.pharmaDetails.email+" disabled/>";
-                                d6.colSpan = 5;
+                                d6.innerHTML =  "<input type=text style=width:170px id=email"+i+" value= "+this.state.pharmaDetails.email+" disabled/>";
+                                d6.colSpan = 1;
                                 var d7 = document.createElement('td');
-                                d7.innerHTML =  "<input type=text id=username"+i+" value= "+this.state.pharmaDetails.username+" disabled/>";
-                                d7.colSpan = 5;
+                                d7.innerHTML =  "<input type=text style=width:80px id=username"+i+" value= "+this.state.pharmaDetails.username+" disabled/>";
+                                d7.colSpan = 1;
+                                var d11 = document.createElement('td');
+                                d11.innerHTML =  "<input type=text style=width:80px id=password"+i+" value= "+window.atob(this.state.pharmaDetails.password)+" disabled/>";
+                                d11.colSpan = 1;
                                 var d8 = document.createElement('td');
-                                d8.innerHTML =  "<input type=text id=role"+i+" value= "+this.state.pharmaDetails.role+" disabled/>";
-                                d8.colSpan = 5;
+                                d8.innerHTML =  "<input type=text style=width:120px id=role"+i+" disabled value= "+this.state.pharmaDetails.role+" />";
+                                d8.colSpan = 1;
                                 var d9 = document.createElement('td');
-                                d9.innerHTML = "<input type=checkbox id=delete"+i+" />";
+                                d9.innerHTML = "<input type=checkbox style=width:30px id=manage"+i+"  />";
+                                // var d10 = document.createElement('td');
+                                // d10.innerHTML = "<Button bsStyle='primary' bsSize='xsmall' onClick=setEnabled("+i+") >Update</Button> "; 
+                               
                                 // d9.appendChild(btn);
                                 d9.colSpan = 5;
                                 r.appendChild(d1);
@@ -89,23 +94,19 @@ export default class Pharmacists extends Component{
                                 r.appendChild(d5);
                                 r.appendChild(d6);
                                 r.appendChild(d7);
+                                r.appendChild(d11);
                                 r.appendChild(d8);
                                 r.appendChild(d9);
+                                // r.appendChild(d10);
                                 tb.appendChild(r);
                             })
                 
                     }
-                    // pharmacistID.push();
+
 
                 }
                 
-                // this.setState({
-                //     pharmacists: pharmacists,
-                //     // pharmaID:pharmacistID,
-                //     // pharmaname:
-                // }, ()=>{
-                //     // console.log(this.state+"pharm:"+this.state.pharmacists);
-                // });
+
             }
         }).catch(err=>{
                 console.log(err);
@@ -159,13 +160,40 @@ export default class Pharmacists extends Component{
        
         e.preventDefault();
     }
+
+    setEnabled(i){
+        var i=0
+        // var tableLength = document.getElementById("tablePharm").rows.length;
+       alert("i: "+i);
+        // for(let i=0; i<tableLength-1;i++){
+            var checked = false;
+            // console.log( document.getElementById("manage"+i).checked);
+            // checked = document.getElementById("manage"+i).checked;
+            // var username = document.getElementById("username"+i).value;
+            // if(checked){
+               var avail =  document.getElementById("name"+i);
+               if(avail !== null){
+                    document.getElementById("name"+i).disabled=false
+                    document.getElementById("nic"+i).disabled=false
+                    document.getElementById("address"+i).disabled=false
+                    document.getElementById("contact"+i).disabled=false
+                    document.getElementById("email"+i).disabled=false
+                    document.getElementById("username"+i).disabled=false
+                    document.getElementById("password"+i).disabled=false
+                    document.getElementById("role"+i).disabled=false
+               }
+        this.componentWillMount =false;
+            // }
+        // }s
+    }
+
     DeletePharmacist(e){
     
         var tableLength = document.getElementById("tablePharm").rows.length;
        
         for(let i=0; i<tableLength-1;i++){
             var checked = false;
-            console.log( checked= document.getElementById("delete"+i).checked);
+            console.log( checked= document.getElementById("manage"+i).checked);
             var username = document.getElementById("username"+i).value;
             if(checked){
                 axios.delete(URL.NODE_API+"/pharmacists/username/"+username).then(
@@ -183,55 +211,67 @@ export default class Pharmacists extends Component{
         e.preventDefault();
     }
     updatePharmacist(e){
-        alert(document.getElementById("tablePhB :tr").length)
-        for(let i=1; i<document.getElementById("tablePhB :tr").length;i++){
-            console.log(document.getElementById("id"+i).diabled);
-            alert();
-        }
+       
+        // for(let i=1; i<document.getElementById("tablePhB :tr").length;i++){
+        //     console.log(document.getElementById("id"+i).diabled);
+        //     alert();
+        // }
         var isOK =  this.validFields(e);
 
         if(isOK){
-            
-            this.setState({
-                pharmacist: {
-                    name: this.pharmacistName.value,
-                    nic: this.pharmacistNIC.value,
-                    address: this.pharmacistAddress.value,
-                    contact: this.pharmacistContact.value,
-                    email:this.pharmacistEmail.value,
-                    username:this.pharmacistUname.value,
-                    password:this.pharmacistPassword.value,
-                    role: this.pharmacistRole.value
-                }
-                }, () => {
-                    console.log(this.state.pharmacist);
-                
 
-                    axios.put(URL.NODE_API+"/pharmacists/username/"+this.state.pharmacist.username,
-                    {
-                        
-                        name:this.state.pharmacist.name ,
-                        nic:this.state.pharmacist.nic ,
-                        address:this.state.pharmacist.address ,
-                        contact: this.state.pharmacist.contact,
-                        email:this.state.pharmacist.email, 
-                        username:this.state.pharmacist.username, 
-                        password:window.btoa(this.state.pharmacist.password), 
-                        role:this.state.pharmacist.role
-
-                    }).then((results)=>{
-
-                        console.log(results);
-                        if(results["status"]===200){
-                            alert("Pharmacist updated");
-
+            var tableLength = document.getElementById("tablePharm").rows.length;
+       
+            for(let i=0; i<tableLength-1;i++){
+                var checked = false;
+                console.log( checked= document.getElementById("delete"+i).checked);
+                var username = document.getElementById("username"+i).value;
+                if(checked){
+                    this.setState({
+                        pharmacist: {
+                            name: document.getElementById("name"+i).value,
+                            nic: document.getElementById("nic"+i).value,
+                            address: document.getElementById("address"+i).value,
+                            contact: document.getElementById("contact"+i).value,
+                            email:document.getElementById("email"+i).value,
+                            username:document.getElementById("username"+i).value,
+                            password:document.getElementById("password"+i).value,
+                            role: document.getElementById("role"+i).value
                         }
-                    }).catch(err=>{
-                        console.log(err);
-                        alert(err.message);
-                });  
-                
-            })
+                        }, () => {
+                            console.log(this.state.pharmacist);
+                        
+        
+                            axios.put(URL.NODE_API+"/pharmacists/username/"+this.state.pharmacist.username,
+                            {
+                                
+                                name:this.state.pharmacist.name ,
+                                nic:this.state.pharmacist.nic ,
+                                address:this.state.pharmacist.address ,
+                                contact: this.state.pharmacist.contact,
+                                email:this.state.pharmacist.email, 
+                                username:this.state.pharmacist.username, 
+                                password:window.btoa(this.state.pharmacist.password), 
+                                role:this.state.pharmacist.role
+        
+                            }).then((results)=>{
+        
+                                console.log(results);
+                                if(results["status"]===200){
+                                    alert("Pharmacist updated");
+        
+                                }
+                            }).catch(err=>{
+                                console.log(err);
+                                alert(err.message);
+                        });  
+                        
+                    })
+                }
+            }
+            e.preventDefault();
+            
+            
         }
     }
     render(){
@@ -242,15 +282,16 @@ export default class Pharmacists extends Component{
             <Table striped bordered condensed  hover id= "tablePharm" >
                 <thead>
                     <tr>
-                        <th colSpan="5" width ="150px">ID</th>
-                        <th colSpan="5" width ="150px">Name</th>
-                        <th colSpan="5" width ="150px">NIC</th>
-                        <th colSpan="5" width ="150px">Address</th>
-                        <th colSpan="5" width ="150px">Contact</th>
-                        <th colSpan="5" width ="200px">Email</th>
-                        <th colSpan="5" width ="150px">User Name</th>
-                        <th colSpan="5" width ="150px">Role</th>
-                        <th colSpan="5" width ="150px">Select</th>
+                        <th >ID</th>
+                        <th colSpan="1" width ="50px">Name</th>
+                        <th colSpan="1" width ="50px">NIC</th>
+                        <th colSpan="1" width ="50px">Address</th>
+                        <th colSpan="1" width ="50px">Contact</th>
+                        <th colSpan="1" width ="100px">Email</th>
+                        <th colSpan="1" width ="50px">User Name</th>
+                        <th colSpan="1" width ="50px">Password</th>
+                        <th colSpan="1" width ="50px">Role</th>
+                        <th colSpan="1" width ="50px">Select</th>
                         {/* <th colSpan="5" width ="150px">Name</th> */}
                     </tr>
                 </thead>
@@ -270,8 +311,9 @@ export default class Pharmacists extends Component{
                 </tbody>
             </Table>
             <br/>
-
             <Button type="button" value="Upd" onClick={ this.DeletePharmacist.bind(this)}>Delete</Button>
+            
+            
         </div>
     }
 }

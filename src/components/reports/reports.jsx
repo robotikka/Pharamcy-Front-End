@@ -91,7 +91,7 @@ export default class Reports extends Component{
                     marginLeft: '10%',
                     marginRight: '10%'
                 })}>
-                    <h3 align="center">Reports on dispenses</h3>
+                    <h3 align="center">Reports on Pharmacy</h3>
 
                     <br/>
                     <Table  striped bordered condensed  hover id="reportTable">

@@ -67,7 +67,7 @@ export default class Reports extends Component{
                         }
                     }
                     else{
-                        // alert("login failed.");
+                        alert("login failed.");
                         document.getElementById("LoggedUser").innerHTML=  "<font color=red>Not Logged In</font>";
                         document.getElementById("navPaneLeft").hidden = true;
                         // window.location.href = "http://localhost:3000/login";

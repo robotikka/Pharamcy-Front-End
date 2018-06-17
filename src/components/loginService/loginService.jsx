@@ -38,9 +38,15 @@ export default class Reports extends Component{
         axios.get(NODE_URL+"/pharmacists/username/"+username, {headers: { 'crossDomain': true }}).then(
             (recieved)=>{
                 // alert(recieved.data.message);
+               
+                if(recieved.data.message[0]===undefined){
+                    alert("Login Fails!");
+                }
                 if(recieved.status!==404){
+                    
                     // console.log(username+ ":>>" + JSON.stringify(recieved)+"||"+password+":>>"+recieved.data.message[0].password)
                     console.log(window.btoa(password)+":::"+recieved.data.message[0].password);
+                    
                     if((recieved.data.message[0].password===window.btoa(password))){
 
                         alert("login succuss!");

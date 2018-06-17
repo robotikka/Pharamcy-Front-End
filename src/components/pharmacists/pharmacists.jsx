@@ -78,7 +78,7 @@ export default class Pharmacists extends Component{
                                 d11.innerHTML =  "<input type=text style=width:80px id=password"+i+" value= "+window.atob(this.state.pharmaDetails.password)+" disabled/>";
                                 d11.colSpan = 1;
                                 var d8 = document.createElement('td');
-                                d8.innerHTML =  "<input type=text style=width:120px id=role"+i+" disabled value= "+this.state.pharmaDetails.role+" />";
+                                d8.innerHTML =  "<input type=text style=width:150px id=role"+i+" disabled value= "+this.state.pharmaDetails.role+" />";
                                 d8.colSpan = 1;
                                 var d9 = document.createElement('td');
                                 d9.innerHTML = "<input type=checkbox style=width:30px id=manage"+i+"  />";
@@ -190,25 +190,34 @@ export default class Pharmacists extends Component{
     DeletePharmacist(e){
     
         var tableLength = document.getElementById("tablePharm").rows.length;
-       
-        for(let i=0; i<tableLength-1;i++){
-            var checked = false;
-            console.log( checked= document.getElementById("manage"+i).checked);
-            var username = document.getElementById("username"+i).value;
-            if(checked){
-                axios.delete(URL.NODE_API+"/pharmacists/username/"+username).then(
-                    result=>{
-                        alert("user Deleted");
-                        window.location.href="http://localhost:3000/viewPharmacists";
-                    }
-                ).catch(
-                    err=>{
-                        alert(err);
-                    }
-                )
+        var deleted = false;
+        if (window.confirm("Confirm")) {
+
+            for(let i=0; i<tableLength-1;i++){
+                var checked = false;
+                console.log( checked= document.getElementById("manage"+i).checked);
+                var username = document.getElementById("username"+i).value;
+                if(checked){
+                    axios.delete(URL.NODE_API+"/pharmacists/username/"+username).then(
+                        result=>{
+                            deleted = true;
+                            window.location.href="http://localhost:3000/viewPharmacists";
+                        }
+                    ).catch(
+                        err=>{
+                            alert(err);
+                        }
+                    )
+                }
             }
-        }
+            if(deleted ===true){
+                alert("Deleted")
+            }
+        }else {
+            return
+          }
         e.preventDefault();
+
     }
     updatePharmacist(e){
        
